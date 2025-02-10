@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<manifest>
+    <!--Device Trees-->
+    <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11"/>
+
+    <!--Kernel-->
+    <project path="kernel/motorola/apq8084" name="lucasgsq/kernel_motorola_apq8084" remote="github" revision="A11" />
+
+    <!-- Vendor folders -->
+    <project path="vendor/motorola" name="lucasgsq/proprietary_vendor_motorola" remote="github" revision="A11" />
+	
+    <!-- timekeep service-->
+	<project name="LineageOS/android_hardware_sony_timekeep" path="hardware/sony/timekeep" remote="github" revision="lineage-18.1" />
+    
+</manifest>
