@@ -1,0 +1,3 @@
+patches.sh text eol=lf
+patches.py text eol=lf
+patches.json text eol=lf

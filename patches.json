@@ -1,0 +1,22 @@
+[
+  {
+    "path": "hardware/qcom-caf/apq8084/media",
+    "url": "https://github.com/fgl27/android_hardware_qcom_media",
+    "branch": "lineage-18.1-caf-apq8084",
+    "commits": [
+      "efd4fd850c712bc43b2462b2ad3d753a8e0af043",
+      "5cd7a23f4afe611a541ce4446068112ff6c8b513",
+      "ebb806f4a0b611653af90ffe4821f7d737d805e3",
+      "51f6e084e952ba14cc610db76575f5a00e84f015",
+      "cfe448c898ee4c0cf7c98b873e789c0fd58e6675"
+    ]
+  },
+  {
+    "path": "hardware/qcom-caf/apq8084/display",
+    "url": "https://github.com/fgl27/android_hardware_qcom_display",
+    "branch": "lineage-18.1-caf-apq8084",
+    "commits": [
+      "2488ddb917b4fd36e25ad0fcd2bfe554e0357d42"
+    ]
+  }
+]
