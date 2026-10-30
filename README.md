@@ -1,6 +1,8 @@
 ## LineageOS 18.1 local_manifests for Moto Maxx (Quark)
 
 This is the current Moto Maxx (Quark) manifest for LineageOS 18.1 (Android 11). 
+
+This branch selects the `Shamu-LOS-18.1-based` Quark test kernel and includes `system/qcom` for the `libqsap_sdk` dependency required by `libqsapshim`.
 These repos are only validated to build LineageOS ROMs. Any other custom ROM is unsupported.
 
 Steps to build
@@ -22,7 +24,7 @@ Apply patches (in some point I will try to make a patches.sh, but for now:
 Copy quark.xml to {ANDROID_ROOT}/.repo/local_manifests/roomservice.xml - create the folder if it doesnt exist:
 
     mkdir .repo/local_manifests
-    wget -O .repo/local_manifests/quark.xml 'https://raw.githubusercontent.com/lucasgsq/local_manifests/quark-(Moto-Maxx)/quark.xml'
+    wget -O .repo/local_manifests/quark.xml 'https://raw.githubusercontent.com/lucasgsq/local_manifests/Shamu-LOS-18.1-based/quark.xml'
 
 
 Return to {ANDROID_ROOT} and repo sync
