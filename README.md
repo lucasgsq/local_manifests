@@ -3,6 +3,13 @@
 This is the current Moto Maxx (Quark) manifest for LineageOS 18.1 (Android 11). 
 
 This branch selects the `Shamu-LOS-18.1-based` Quark test kernel and includes `system/qcom` for the `libqsap_sdk` dependency required by `libqsapshim`.
+
+The APQ8084 media and display projects now come from owned repositories, both on `Shamu-LOS-18.1-based`:
+
+- https://github.com/lucasgsq/android_hardware_qcom_media
+- https://github.com/lucasgsq/android_hardware_qcom_display
+
+Their original Git histories and the six requested patch commits are preserved. Media ends at `cfe448c898ee4c0cf7c98b873e789c0fd58e6675`; display ends at `2488ddb917b4fd36e25ad0fcd2bfe554e0357d42`. Normal synchronization and the optional patch checker no longer fetch from fgl27. Author credits, commit messages, and licenses remain intact. See `SOURCE_PROVENANCE.md` for the preserved bases and patch list.
 These repos are only validated to build LineageOS ROMs. Any other custom ROM is unsupported.
 
 Steps to build
@@ -20,11 +27,21 @@ Download the manifest and patch automation from this test branch. Run these comm
 
 Keep only one copy of the Quark manifest: if `roomservice.xml` already declares the same projects, replace that manifest rather than keeping duplicate declarations in both XML files. Back up local edits before replacing files.
 
-Sync first, then check and apply the pinned media/display patches:
+For an existing build tree, preserve local edits and commits before changing project sources. For example, create backup branches in the two projects before the first sync with this updated manifest:
+
+    git -C hardware/qcom-caf/apq8084/media branch backup-before-owned-sources-20261030 HEAD
+    git -C hardware/qcom-caf/apq8084/display branch backup-before-owned-sources-20261030 HEAD
+
+These commands preserve committed history only; commit or separately back up any uncommitted work. If a backup branch with this name already exists, choose a new name rather than replacing it.
+
+With this manifest, sync already includes all six patches. No manual cherry-picking or `--apply` step is normally needed:
 
     repo sync
     sh .repo/local_manifests/patches.sh --check
-    sh .repo/local_manifests/patches.sh --apply
+
+If sync reports a project-source mismatch, stop and inspect the saved branches and the error before using any force option. This update does not run sync or rewrite your existing build tree automatically.
+
+The patch script is retained as an optional checker and migration tool. If a compatible older checkout still needs the patches, use `sh .repo/local_manifests/patches.sh --apply`. Its fetch URLs now point to your owned repositories.
 
 The script requires Python 3 and Git, normally available in the Android 11 build environment. It can also be run directly with `python3 .repo/local_manifests/patches.py`. Use `--root /path/to/android` when running from another directory. Without an option it defaults to `--check`.
 

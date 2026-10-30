@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <manifest>
+    <!-- Replace only the APQ8084 projects inherited from LineageOS. -->
+    <remove-project name="LineageOS/android_hardware_qcom_media" path="hardware/qcom-caf/apq8084/media" />
+    <remove-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/apq8084/display" />
+
+    <!-- Owned copies include the pinned Quark media/display backports. -->
+    <project path="hardware/qcom-caf/apq8084/media" name="lucasgsq/android_hardware_qcom_media" remote="github" revision="Shamu-LOS-18.1-based" groups="qcom,pdk-qcom" />
+    <project path="hardware/qcom-caf/apq8084/display" name="lucasgsq/android_hardware_qcom_display" remote="github" revision="Shamu-LOS-18.1-based" groups="pdk-qcom,qcom,qcom_display" />
+
     <!--Device Trees-->
     <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11"/>
 
