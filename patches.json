@@ -2,7 +2,7 @@
   {
     "path": "hardware/qcom-caf/apq8084/media",
     "url": "https://github.com/lucasgsq/android_hardware_qcom_media",
-    "branch": "Shamu-LOS-18.1-based",
+    "branch": "A11+",
     "commits": [
       "efd4fd850c712bc43b2462b2ad3d753a8e0af043",
       "5cd7a23f4afe611a541ce4446068112ff6c8b513",
@@ -14,7 +14,7 @@
   {
     "path": "hardware/qcom-caf/apq8084/display",
     "url": "https://github.com/lucasgsq/android_hardware_qcom_display",
-    "branch": "Shamu-LOS-18.1-based",
+    "branch": "A11+",
     "commits": [
       "2488ddb917b4fd36e25ad0fcd2bfe554e0357d42"
     ]

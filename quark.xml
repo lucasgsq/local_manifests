@@ -6,14 +6,14 @@
     <remove-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/apq8084/display" />
 
     <!-- Owned copies include the pinned Quark media/display backports. -->
-    <project path="hardware/qcom-caf/apq8084/media" name="lucasgsq/android_hardware_qcom_media" remote="github" revision="Shamu-LOS-18.1-based" groups="qcom,pdk-qcom" />
-    <project path="hardware/qcom-caf/apq8084/display" name="lucasgsq/android_hardware_qcom_display" remote="github" revision="Shamu-LOS-18.1-based" groups="pdk-qcom,qcom,qcom_display" />
+    <project path="hardware/qcom-caf/apq8084/media" name="lucasgsq/android_hardware_qcom_media" remote="github" revision="A11+" groups="qcom,pdk-qcom" />
+    <project path="hardware/qcom-caf/apq8084/display" name="lucasgsq/android_hardware_qcom_display" remote="github" revision="A11+" groups="pdk-qcom,qcom,qcom_display" />
 
     <!--Device Trees-->
-    <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="Shamu-LOS-18.1-based"/>
+    <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11+"/>
 
     <!--Kernel-->
-    <project path="kernel/motorola/apq8084" name="lucasgsq/kernel_motorola_apq8084" remote="github" revision="Shamu-LOS-18.1-based" />
+    <project path="kernel/motorola/apq8084" name="lucasgsq/kernel_motorola_apq8084" remote="github" revision="A11+" />
 
     <!-- Qualcomm SoftAP SDK required by libqsapshim -->
     <project name="LineageOS/android_system_qcom" path="system/qcom" remote="github" revision="lineage-18.1" />

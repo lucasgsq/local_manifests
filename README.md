@@ -2,11 +2,11 @@
 
 This is the current Moto Maxx (Quark) manifest for LineageOS 18.1 (Android 11). 
 
-This branch selects the `Shamu-LOS-18.1-based` Quark test kernel and includes `system/qcom` for the `libqsap_sdk` dependency required by `libqsapshim`.
+This branch selects the `A11+` Quark test kernel and includes `system/qcom` for the `libqsap_sdk` dependency required by `libqsapshim`.
 
-The device tree also uses `Shamu-LOS-18.1-based`. Its boot command line explicitly requests global SELinux enforcing mode (`enforcing=1 androidboot.selinux=enforcing`) for policy testing. After updating this manifest, sync both `device/motorola/quark` and `kernel/motorola/apq8084`, rebuild the ROM, then verify `adb shell getenforce` reports `Enforcing`. Do not assume that installing a newly built image proves the runtime mode. The pre-existing userdebug `sudaemon` permissive-domain policy and recovery-specific permissive service are unchanged. Keep the previously booting ROM available while testing policy denials; unrelated local build modifications or root tools can still affect the observed runtime mode.
+The device tree also uses `A11+`. Its boot command line explicitly requests global SELinux enforcing mode (`enforcing=1 androidboot.selinux=enforcing`) for policy testing. After updating this manifest, sync both `device/motorola/quark` and `kernel/motorola/apq8084`, rebuild the ROM, then verify `adb shell getenforce` reports `Enforcing`. Do not assume that installing a newly built image proves the runtime mode. The pre-existing userdebug `sudaemon` permissive-domain policy and recovery-specific permissive service are unchanged. Keep the previously booting ROM available while testing policy denials; unrelated local build modifications or root tools can still affect the observed runtime mode.
 
-The APQ8084 media and display projects now come from owned repositories, both on `Shamu-LOS-18.1-based`:
+The APQ8084 media and display projects now come from owned repositories, both on `A11+`:
 
 - https://github.com/lucasgsq/android_hardware_qcom_media
 - https://github.com/lucasgsq/android_hardware_qcom_display
@@ -24,7 +24,7 @@ Download the manifest and patch automation from this test branch. Run these comm
 
     mkdir -p .repo/local_manifests
     for file in quark.xml patches.sh patches.py patches.json; do
-        wget -O ".repo/local_manifests/$file" "https://raw.githubusercontent.com/lucasgsq/local_manifests/Shamu-LOS-18.1-based/$file" || break
+        wget -O ".repo/local_manifests/$file" "https://raw.githubusercontent.com/lucasgsq/local_manifests/A11+/$file" || break
     done
 
 Keep only one copy of the Quark manifest: if `roomservice.xml` already declares the same projects, replace that manifest rather than keeping duplicate declarations in both XML files. Back up local edits before replacing files.
@@ -55,7 +55,7 @@ Detection uses Git history, not a semantic audit of the final source. If a patch
 
 If a cherry-pick conflicts, the script stops and leaves Git's recovery state intact. In the reported project, inspect `git status`, resolve the conflict and run `git cherry-pick --continue`, or cancel the current pick with `git cherry-pick --abort`. Then rerun the script. Earlier successful commits remain; there is no automatic reset, stash, rollback, or push. Do not run `repo sync` or another patch process concurrently with the script.
 
-Recheck after future `repo sync` operations. The script does not install a sync hook or replace the source projects with forks. Kernel patches are already tracked by the `Shamu-LOS-18.1-based` kernel branch and are not repeated here.
+Recheck after future `repo sync` operations. The script does not install a sync hook or replace the source projects with forks. Kernel patches are already tracked by the `A11+` kernel branch and are not repeated here.
 
 After the patches have been applied successfully:
 

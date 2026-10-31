@@ -1,6 +1,6 @@
 # Preserved Quark APQ8084 sources
 
-The `Shamu-LOS-18.1-based` manifest uses the following owned copies. These are standalone repositories with the selected full Git history, rather than build-time references to the previous maintainer's repositories.
+The `A11+` manifest uses the following owned copies. These are standalone repositories with the selected full Git history, rather than build-time references to the previous maintainer's repositories.
 
 | Project | Official LineageOS 18.1 base | Owned test branch tip |
 |---|---|---|
@@ -23,4 +23,4 @@ The display commit:
 
 Both selected histories are direct continuations of their listed official bases. No additional source changes were introduced during preservation. The original hashes, authors, messages, source trees and license files are retained.
 
-Future changes should use the owned `Shamu-LOS-18.1-based` branches. The original endpoints above are reproducibility references, not a claim that future branch tips will remain unchanged. Build and device testing remain necessary after synchronization.
+Future changes should use the owned `A11+` branches. The original endpoints above are reproducibility references, not a claim that future branch tips will remain unchanged. Build and device testing remain necessary after synchronization.
