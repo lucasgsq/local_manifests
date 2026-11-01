@@ -16,7 +16,7 @@ LineageOS 18.1 workspace and A11+ manifest unchanged.
 | LineageOS/android_device_qcom_sepolicy at device/qcom/sepolicy-legacy | lineage-18.1-legacy |
 | LineageOS/android_system_qcom | lineage-19.1 |
 | LineageOS/android_hardware_sony_timekeep | lineage-19.1 |
-| lucasgsq/proprietary_vendor_motorola | A11 (legacy blobs) |
+| lucasgsq/proprietary_vendor_motorola | A12+ (legacy blobs, TurboToast excluded) |
 
 Upstream LineageOS 19.1 no longer declares APQ8084 projects or the legacy
 Qualcomm policy path. quark.xml supplies them explicitly without removing
