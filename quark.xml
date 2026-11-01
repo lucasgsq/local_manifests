@@ -13,7 +13,7 @@
     <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11+"/>
 
     <!--Kernel-->
-    <project path="kernel/motorola/apq8084" name="lucasgsq/kernel_motorola_apq8084" remote="github" revision="A11+" />
+    <project path="kernel/motorola/apq8084" name="lucasgsq/kernel_motorola_apq8084" remote="github" revision="A11+KSU" />
 
     <!-- Qualcomm SoftAP SDK required by libqsapshim -->
     <project name="LineageOS/android_system_qcom" path="system/qcom" remote="github" revision="lineage-18.1" />

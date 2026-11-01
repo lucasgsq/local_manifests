@@ -1,4 +1,16 @@
-## LineageOS 18.1 local_manifests for Moto Maxx (Quark)
+## Quark A11+KSU experimental LineageOS 18.1 manifest
+
+This branch selects kernel `A11+KSU`, with pinned backslashxx KernelSU
+21a0a46155d964927afab6fde40b9a09aa995357 built into the ARM32 kernel.
+Device and vendor remain `A11+`, including the optional-app changes.
+Global SELinux remains enforcing. This is an experimental root integration,
+not a boot-tested release. See the kernel's Documentation/quark-kernelsu.md.
+
+To select this manifest in a separate LineageOS 18.1 workspace, download
+quark.xml from branch A11+KSU rather than A11+. Do not change manifests or
+sync while a build is running. Only the kernel selection differs from A11+.
+The general A11+ build instructions below still apply; substitute A11+KSU
+only in local_manifests download URLs, not in device/vendor references.
 
 This is the current Moto Maxx (Quark) manifest for LineageOS 18.1 (Android 11). 
 
