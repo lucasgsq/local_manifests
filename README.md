@@ -16,7 +16,7 @@ LineageOS 18.1 workspace and A11+ manifest unchanged.
 | LineageOS/android_device_qcom_sepolicy at device/qcom/sepolicy-legacy | lineage-18.1-legacy |
 | LineageOS/android_system_qcom | lineage-19.1 |
 | LineageOS/android_hardware_sony_timekeep | lineage-19.1 |
-| lucasgsq/proprietary_vendor_motorola | A12+ (legacy blobs, TurboToast excluded) |
+| lucasgsq/proprietary_vendor_motorola | A12+ (legacy blobs, optional third-party apps excluded) |
 
 Upstream LineageOS 19.1 no longer declares APQ8084 projects or the legacy
 Qualcomm policy path. quark.xml supplies them explicitly without removing
@@ -24,6 +24,10 @@ absent upstream projects. A device-project linkfile restores the APQ8084
 Make namespace guard omitted upstream. Media/display patches remain in the
 user's repositories; patches.json still selects these owned A11+ baselines.
 Android 12 API compatibility of the legacy projects is not yet validated.
+
+TurboToast and Kernel Adiutor are no longer preinstalled. The original
+presigned Kernel Adiutor APK can be installed manually as an uninstallable
+user app; see `OPTIONAL_APPS.md`. This does not change A12+ SELinux settings.
 
 Kernel A12+ now includes A11+ through f9c074c2cab: keys/perf retained and the
 problematic math64 change reverted. There is no distinct active Android 12
