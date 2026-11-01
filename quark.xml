@@ -19,7 +19,7 @@
     <project name="LineageOS/android_system_qcom" path="system/qcom" remote="github" revision="lineage-18.1" />
 
     <!-- Vendor folders -->
-    <project path="vendor/motorola" name="lucasgsq/proprietary_vendor_motorola" remote="github" revision="A11" />
+    <project path="vendor/motorola" name="lucasgsq/proprietary_vendor_motorola" remote="github" revision="A11+" />
 	
     <!-- timekeep service-->
 	<project name="LineageOS/android_hardware_sony_timekeep" path="hardware/sony/timekeep" remote="github" revision="lineage-18.1" />

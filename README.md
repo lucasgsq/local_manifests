@@ -2,6 +2,13 @@
 
 This is the current Moto Maxx (Quark) manifest for LineageOS 18.1 (Android 11). 
 
+Vendor sources use `lucasgsq/proprietary_vendor_motorola` branch `A11+`.
+TurboToast and Kernel Adiutor are no longer preinstalled. To install Kernel
+Adiutor as an uninstallable user app, use the original presigned APK at
+`vendor/motorola/quark/proprietary/vendor/app/KernelAdiutor/KernelAdiutor.apk`
+after installing the updated ROM. The APK remains archived in Git but is not
+selected in PRODUCT_PACKAGES. See `OPTIONAL_APPS.md` for installation details.
+
 This branch selects the `A11+` Quark test kernel and includes `system/qcom` for the `libqsap_sdk` dependency required by `libqsapshim`.
 
 The device tree also uses `A11+`. Its boot command line explicitly requests global SELinux enforcing mode (`enforcing=1 androidboot.selinux=enforcing`) for policy testing. After updating this manifest, sync both `device/motorola/quark` and `kernel/motorola/apq8084`, rebuild the ROM, then verify `adb shell getenforce` reports `Enforcing`. Do not assume that installing a newly built image proves the runtime mode. The pre-existing userdebug `sudaemon` permissive-domain policy and recovery-specific permissive service are unchanged. Keep the previously booting ROM available while testing policy denials; unrelated local build modifications or root tools can still affect the observed runtime mode.
