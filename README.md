@@ -1,74 +1,77 @@
-## LineageOS 18.1 local_manifests for Moto Maxx (Quark)
+# Quark A12+ — experimental LineageOS 19.1 manifest
 
-This is the current Moto Maxx (Quark) manifest for LineageOS 18.1 (Android 11). 
+This branch targets Android 12.1 / LineageOS 19.1. It is a source-selection
+starting point, not a successfully built or boot-tested ROM. Keep the existing
+LineageOS 18.1 workspace and A11+ manifest unchanged.
 
-This branch selects the `A11+` Quark test kernel and includes `system/qcom` for the `libqsap_sdk` dependency required by `libqsapshim`.
+## Source selection
 
-The device tree also uses `A11+`. Its boot command line explicitly requests global SELinux enforcing mode (`enforcing=1 androidboot.selinux=enforcing`) for policy testing. After updating this manifest, sync both `device/motorola/quark` and `kernel/motorola/apq8084`, rebuild the ROM, then verify `adb shell getenforce` reports `Enforcing`. Do not assume that installing a newly built image proves the runtime mode. The pre-existing userdebug `sudaemon` permissive-domain policy and recovery-specific permissive service are unchanged. Keep the previously booting ROM available while testing policy denials; unrelated local build modifications or root tools can still affect the observed runtime mode.
+| Project | Branch |
+|---|---|
+| lucasgsq/device_motorola_quark | A12+ |
+| lucasgsq/kernel_motorola_apq8084 | A12+ |
+| lucasgsq/android_hardware_qcom_media | A11+ (legacy baseline) |
+| lucasgsq/android_hardware_qcom_display | A11+ (legacy baseline) |
+| LineageOS/android_hardware_qcom_audio | lineage-18.1-caf-apq8084 |
+| LineageOS/android_device_qcom_sepolicy at device/qcom/sepolicy-legacy | lineage-18.1-legacy |
+| LineageOS/android_system_qcom | lineage-19.1 |
+| LineageOS/android_hardware_sony_timekeep | lineage-19.1 |
+| lucasgsq/proprietary_vendor_motorola | A11 (legacy blobs) |
 
-The APQ8084 media and display projects now come from owned repositories, both on `A11+`:
+Upstream LineageOS 19.1 no longer declares APQ8084 projects or the legacy
+Qualcomm policy path. quark.xml supplies them explicitly without removing
+absent upstream projects. A device-project linkfile restores the APQ8084
+Make namespace guard omitted upstream. Media/display patches remain in the
+user's repositories; patches.json still selects these owned A11+ baselines.
+Android 12 API compatibility of the legacy projects is not yet validated.
 
-- https://github.com/lucasgsq/android_hardware_qcom_media
-- https://github.com/lucasgsq/android_hardware_qcom_display
+Kernel A12+ now includes A11+ through f9c074c2cab: keys/perf retained and the
+problematic math64 change reverted. There is no distinct active Android 12
+kernel patch series yet. Device A12+ includes A11+ through 06687bfe plus its
+own Android 12 overlay/ueventd migrations. Pending A11+ audio experiments
+are included; their device validation is still outstanding.
 
-Their original Git histories and the six requested patch commits are preserved. Media ends at `cfe448c898ee4c0cf7c98b873e789c0fd58e6675`; display ends at `2488ddb917b4fd36e25ad0fcd2bfe554e0357d42`. Normal synchronization and the optional patch checker no longer fetch from fgl27. Author credits, commit messages, and licenses remain intact. See `SOURCE_PROVENANCE.md` for the preserved bases and patch list.
-These repos are only validated to build LineageOS ROMs. Any other custom ROM is unsupported.
+## Separate workspace
 
-Steps to build
+Run in a new build directory on the Ubuntu machine, preserving lineage18:
 
-    Clone Lineage 18.1 repo and setup your build environment according to the Lineage documentation
-    (you can use the Shamu's (Nexus 6) build guide as a reference guide, but remember we're building for Quark!)
-    https://wiki.lineageos.org/devices/shamu/build/
-    
-Download the manifest and patch automation from this test branch. Run these commands from the Android source root:
+```bash
+mkdir -p ~/android/lineage19
+cd ~/android/lineage19
+repo init -u https://github.com/LineageOS/android.git -b lineage-19.1
+git clone --branch 'A12+' --single-branch https://github.com/lucasgsq/local_manifests.git .repo/local_manifests
+repo sync -j4
+```
 
-    mkdir -p .repo/local_manifests
-    for file in quark.xml patches.sh patches.py patches.json; do
-        wget -O ".repo/local_manifests/$file" "https://raw.githubusercontent.com/lucasgsq/local_manifests/A11+/$file" || break
-    done
+Avoid duplicate roomservice.xml declarations. Do not reuse Android 11 out.
+The first build is an integration check, not an expected bootable release:
 
-Keep only one copy of the Quark manifest: if `roomservice.xml` already declares the same projects, replace that manifest rather than keeping duplicate declarations in both XML files. Back up local edits before replacing files.
+```bash
+source build/envsetup.sh
+lunch lineage_quark-userdebug
+mka bacon -j8
+```
 
-For an existing build tree, preserve local edits and commits before changing project sources. For example, create backup branches in the two projects before the first sync with this updated manifest:
+Preserve private signing keys separately. No keys or local certificate
+overrides are copied automatically from lineage18. Use the same keys if
+signed-update continuity is needed. Save `repo manifest -r` alongside each
+build to record exact revisions; branch references intentionally advance.
 
-    git -C hardware/qcom-caf/apq8084/media branch backup-before-owned-sources-20261030 HEAD
-    git -C hardware/qcom-caf/apq8084/display branch backup-before-owned-sources-20261030 HEAD
+## Open integration work
 
-These commands preserve committed history only; commit or separately back up any uncommitted work. If a backup branch with this name already exists, choose a new name rather than replacing it.
+1. Resolve Android 12 build/API compatibility of legacy APQ8084 audio,
+   media/display, device packages, shims and vendor blobs. Reconcile hardware
+   dependencies and Soong namespaces instead of removing targets blindly.
+2. Reconcile SELinux/property namespaces with Android 12, preserving enforcing;
+   legacy policy availability does not establish compilation compatibility.
+3. Align VINTF/HIDL packages/services for audio, power, keymaster, DRM, radio
+   and camera with Quark blob symbols and the target framework.
+4. Audit Linux 3.10 networking/BPF, binder and toolchain requirements against
+   Android 12. A property declaration does not implement a kernel feature.
+5. Preserve Quark partition sizes, boot offsets and encryption. Do not copy
+   Shamu fstab or remove encryption as a generic boot workaround.
+6. Defer IMS/VoLTE and perfd/audio_cutback path changes until matching binaries,
+   policies, modem and carrier behavior have been analyzed together.
+7. Validate build, recovery/update behavior, enforcing boot and hardware.
 
-With this manifest, sync already includes all six patches. No manual cherry-picking or `--apply` step is normally needed:
-
-    repo sync
-    sh .repo/local_manifests/patches.sh --check
-
-If sync reports a project-source mismatch, stop and inspect the saved branches and the error before using any force option. This update does not run sync or rewrite your existing build tree automatically.
-
-The patch script is retained as an optional checker and migration tool. If a compatible older checkout still needs the patches, use `sh .repo/local_manifests/patches.sh --apply`. Its fetch URLs now point to your owned repositories.
-
-The script requires Python 3 and Git, normally available in the Android 11 build environment. It can also be run directly with `python3 .repo/local_manifests/patches.py`. Use `--root /path/to/android` when running from another directory. Without an option it defaults to `--check`.
-
-`--check` fetches the source branches and lists pending/already-present commits. It creates no patch commits and does not test compilation or conflict-free application. `--apply` cherry-picks only missing patches, in the order pinned in `patches.json`, recording source SHAs with `-x`. The five media commits match the original inclusive range `efd4fd850c712bc43b2462b2ad3d753a8e0af043^..cfe448c898ee4c0cf7c98b873e789c0fd58e6675`; display uses `2488ddb917b4fd36e25ad0fcd2bfe554e0357d42`.
-
-All project working trees must be clean, with no pending merge/rebase/cherry-pick. Existing commits are detected by ancestry or Git patch equivalence, so repeating the script does not duplicate equivalent patches. Contextually adapted implementations with different patch content may still require manual review.
-
-Detection uses Git history, not a semantic audit of the final source. If a patch was later reverted or replaced, review that history before relying on an `SKIP` result.
-
-If a cherry-pick conflicts, the script stops and leaves Git's recovery state intact. In the reported project, inspect `git status`, resolve the conflict and run `git cherry-pick --continue`, or cancel the current pick with `git cherry-pick --abort`. Then rerun the script. Earlier successful commits remain; there is no automatic reset, stash, rollback, or push. Do not run `repo sync` or another patch process concurrently with the script.
-
-Recheck after future `repo sync` operations. The script does not install a sync hook or replace the source projects with forks. Kernel patches are already tracked by the `A11+` kernel branch and are not repeated here.
-
-After the patches have been applied successfully:
-
-    source build/envsetup.sh
-    
-    lunch lineage_quark-[buildflag]
-    
-    make bacon -j[cpucorecount]
-
-Replace buildflag with the type of ROM you are trying to build. Valid codenames:
-
-    user: for user builds
-    userdebug: for user-debug builds
-
-
-Replace core count with the number of CPU cores you have.
+See device/motorola/quark/docs/A12-bringup.md for the device-side checkpoint.
