@@ -33,4 +33,8 @@
     <remove-project name="LineageOS/android_device_lineage_sepolicy" path="device/lineage/sepolicy" optional="true" />
     <project name="lucasgsq/android_device_lineage_sepolicy" path="device/lineage/sepolicy" remote="github" revision="A11+KSU" />
 
+    <!-- Settings fork adds the separately labelled audited backport reference. -->
+    <remove-project name="LineageOS/android_packages_apps_Settings" path="packages/apps/Settings" optional="true" />
+    <project name="lucasgsq/android_packages_apps_Settings" path="packages/apps/Settings" remote="github" revision="A11+KSU" groups="pdk-fs" />
+
 </manifest>
