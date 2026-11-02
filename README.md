@@ -91,3 +91,8 @@ Replace buildflag with the type of ROM you are trying to build. Valid codenames:
 
 
 Replace core count with the number of CPU cores you have.
+
+
+## SELinux consolidation through stage 35
+
+See [SELINUX_UPDATES.md](SELINUX_UPDATES.md) for matching forks, safe migration of local patches, absolute OUT_DIR builds and validation limits.

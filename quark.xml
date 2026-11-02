@@ -10,7 +10,7 @@
     <project path="hardware/qcom-caf/apq8084/display" name="lucasgsq/android_hardware_qcom_display" remote="github" revision="A11+" groups="pdk-qcom,qcom,qcom_display" />
 
     <!--Device Trees-->
-    <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11+"/>
+    <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11+KSU"/>
 
     <!--Kernel-->
     <project path="kernel/motorola/apq8084" name="lucasgsq/kernel_motorola_apq8084" remote="github" revision="A11+KSU" />
@@ -19,9 +19,18 @@
     <project name="LineageOS/android_system_qcom" path="system/qcom" remote="github" revision="lineage-18.1" />
 
     <!-- Vendor folders -->
-    <project path="vendor/motorola" name="lucasgsq/proprietary_vendor_motorola" remote="github" revision="A11+" />
+    <project path="vendor/motorola" name="lucasgsq/proprietary_vendor_motorola" remote="github" revision="A11+KSU" />
 	
     <!-- timekeep service-->
 	<project name="LineageOS/android_hardware_sony_timekeep" path="hardware/sony/timekeep" remote="github" revision="lineage-18.1" />
     
+
+    <!-- Matching SELinux forks: source corrections through validated stage 35. -->
+    <remove-project name="LineageOS/android_device_qcom_sepolicy" path="device/qcom/sepolicy-legacy" optional="true" />
+    <project name="lucasgsq/android_device_qcom_sepolicy" path="device/qcom/sepolicy-legacy" remote="github" revision="A11+KSU" groups="qcom,pdk-qcom" />
+    <remove-project name="LineageOS/android_system_sepolicy" path="system/sepolicy" optional="true" />
+    <project name="lucasgsq/android_system_sepolicy" path="system/sepolicy" remote="github" revision="A11+KSU" groups="pdk" />
+    <remove-project name="LineageOS/android_device_lineage_sepolicy" path="device/lineage/sepolicy" optional="true" />
+    <project name="lucasgsq/android_device_lineage_sepolicy" path="device/lineage/sepolicy" remote="github" revision="A11+KSU" />
+
 </manifest>

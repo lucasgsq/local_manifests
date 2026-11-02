@@ -1,0 +1,496 @@
+{
+  "branch": "A11+KSU",
+  "sdk": 30,
+  "validated_android11_runtime": true,
+  "android12_full_build_pending": false,
+  "repositories": [
+    {
+      "path": "device/motorola/quark",
+      "repository": "lucasgsq/device_motorola_quark",
+      "commit": "4c9b00b2596e655fa2ad8ebf11db8a4b1b6a634d",
+      "previous_commit": "06687bfeef7d47ed62a2d9850bf9be354ac21d45",
+      "files": {
+        "device.mk": {
+          "sha256": "abdb75d6da7ba08378b5e6bf3519ff98bad2da686a68c1b8eeb9d016756f52bf",
+          "binary": false
+        },
+        "rootdir/Android.mk": {
+          "sha256": "08605d6d77449720d792cf9903cb434b671e80b690962c1f27966333b036dd86",
+          "binary": false
+        },
+        "rootdir/camera_start.c": {
+          "sha256": "c0c1e5035d5e584ad24585379555004a9ce8027cda3c0b7dc633734630f89782",
+          "binary": false
+        },
+        "rootdir/etc/init.qcom.rc": {
+          "sha256": "fb2b6a396f9433703f81f4b22df7eae679906c934e49665c3d0fcdce1805270b",
+          "binary": false
+        },
+        "rootdir/etc/quark-camera-data.rc": {
+          "sha256": "66f4fa3a03a6f3a95c61d8ee8d5375bb3fdea1f3ef46fa64104e9a018e6d9514",
+          "binary": false
+        },
+        "sepolicy/bluetooth.te": {
+          "sha256": "c85e51ed9ddf1c632d40fc606acd9013c7ce7d4171a96cd0eb03c82dd57ff191",
+          "binary": false
+        },
+        "sepolicy/clean_scratch_files.te": {
+          "sha256": "e2189ff15af09e06361f4325151bcfabca335ca1a105afb107400ebcaada9d89",
+          "binary": false
+        },
+        "sepolicy/cnd.te": {
+          "sha256": "7d3566f928e886014b9eef250b2d144c6232373d27e4a576fb0da0677b61385d",
+          "binary": false
+        },
+        "sepolicy/file.te": {
+          "sha256": "ee87f26361678133e4aa44f675f704e461c92d5be6df135bbf384caf73e0e80a",
+          "binary": false
+        },
+        "sepolicy/file_contexts": {
+          "sha256": "5c17ded24e3caed0dc558e498b2c2341aabddc9a1ddbae2b09dc3da2aff84138",
+          "binary": false
+        },
+        "sepolicy/flags_health_check.te": {
+          "sha256": "c431ccd15b8d87f4cb3bd70a9e92b067e8e1e47d14975d981abd7511e292141a",
+          "binary": false
+        },
+        "sepolicy/fsck.te": {
+          "sha256": "771c1d9a5e595d56e0504ea86a8de6d6c5ce2681594e3fcab896fea9747d8414",
+          "binary": false
+        },
+        "sepolicy/genfs_contexts": {
+          "sha256": "8f54eb60bbfc6b2f72e94b928f7eb4113463f555869996058da317271574919f",
+          "binary": false
+        },
+        "sepolicy/gmscore_app.te": {
+          "sha256": "f1d4deca1de43f65a4330ea5b4b423e96f26698a9f968a75ace41c5fedd04e2c",
+          "binary": false
+        },
+        "sepolicy/hal_audio.te": {
+          "sha256": "96c20c335aac8c914364aaa703ece813a2a98bdcec1f45145092553a57e4426a",
+          "binary": false
+        },
+        "sepolicy/hal_graphics_allocator.te": {
+          "sha256": "f645a1a3b047c8ff0b6cc4e4e586ef776db1bcf168c4d079af6026edad85f910",
+          "binary": false
+        },
+        "sepolicy/hal_power_default.te": {
+          "sha256": "c671d57032635f296502f01d380c2164f07a1622d34d1c2b444c81dc25a7509d",
+          "binary": false
+        },
+        "sepolicy/hal_wifi_supplicant.te": {
+          "sha256": "1bd7bbaf7bcb7e198af08585b4748b0b8ec52c6333d86adafc197094e3cb4f16",
+          "binary": false
+        },
+        "sepolicy/init.te": {
+          "sha256": "49e1ac3570017a191a6afd712b5f54c110924526ba4e2cd7c233b9f516da26df",
+          "binary": false
+        },
+        "sepolicy/logd.te": {
+          "sha256": "3a792bb4e475681e90a09d3530bf37ffbaa52e30ba7b0dfa09b1cf966d584bb4",
+          "binary": false
+        },
+        "sepolicy/mdm_helper.te": {
+          "sha256": "530e4b8223827e4c25d5a3420808b0b0d10320661ff14809d8c0ff8e34e3a707",
+          "binary": false
+        },
+        "sepolicy/mediaprovider.te": {
+          "sha256": "5c440fcc14fce1df33651c9ce958ca940238fc6d3e5adf4df34a7e0679547fed",
+          "binary": false
+        },
+        "sepolicy/mediaserver.te": {
+          "sha256": "8cf23006e0a0824ec0b14097182741abee19d91eeb4ff317a895d88eedce2632",
+          "binary": false
+        },
+        "sepolicy/mm-qcamerad.te": {
+          "sha256": "0e63caf9de1387660890f71df0fe9828377f380261b6d9eeebc07769e19aac1c",
+          "binary": false
+        },
+        "sepolicy/mmi-boot-sh.te": {
+          "sha256": "293e1fd6cb909141bc8ffb0d8df3e270f53f4c0b82baf1c1fb63f6d4f9145a9c",
+          "binary": false
+        },
+        "sepolicy/mmi-usb-sh.te": {
+          "sha256": "b276ba1a43d362e4b1c75c5aac87c1c1109c4dd05446013e5f7eb1ccf9e9fbb1",
+          "binary": false
+        },
+        "sepolicy/mpdecision.te": {
+          "sha256": "c1960ff22d9209e44bf1737b94aa71a290c14f37b1a65f677697234c69eb0f5e",
+          "binary": false
+        },
+        "sepolicy/netmgrd.te": {
+          "sha256": "063b0571f7b21def48c45057bfcc885fd499fc37898aac46eff848289b2b6eaa",
+          "binary": false
+        },
+        "sepolicy/platform_app.te": {
+          "sha256": "d0e59738c5b4db7ad2a0e99465c9a1a472ffff548fdf55dc85e0771f3aa74f07",
+          "binary": false
+        },
+        "sepolicy/priv_app.te": {
+          "sha256": "f444025e0e5e29c4863941de24cc30380b3fb0a527202ec986f7232cd640b13d",
+          "binary": false
+        },
+        "sepolicy/private/blank_screen.te": {
+          "sha256": "d41c5ff6d3df13e2d4107ee73b76685c9b1f0c54c713b7e0fdac05a9a1cd2038",
+          "binary": false
+        },
+        "sepolicy/private/cne.te": {
+          "sha256": "96d32cb4ed36d1d9514547b4edd617cafbb68e244ab5d5d056192e4c96ab9b40",
+          "binary": false
+        },
+        "sepolicy/proprietaries.te": {
+          "sha256": "cf0bf26b84cadb5468ea6bb5ddfb511c02419b18d549bb3f618c80708eab6d8d",
+          "binary": false
+        },
+        "sepolicy/qmuxd.te": {
+          "sha256": "6d0b46e6aec1328bfad45ef80612934993aa4b20eda29dbdd8ff65a0e39868bd",
+          "binary": false
+        },
+        "sepolicy/quark_overlay_metrics.te": {
+          "sha256": "181bd7b1bd0b370b80d25484b0e44fb359029a81b8d5a1a147cf58b2b300d616",
+          "binary": false
+        },
+        "sepolicy/quark_packaged_files.te": {
+          "sha256": "59f2ab06204542a153fee904a957145f08f983fa336e5a22ee651dc97333660e",
+          "binary": false
+        },
+        "sepolicy/quark_services.te": {
+          "sha256": "c552b23bc02aed8419fad10c6f2347bb0431a2b0c914c358d3dd0af52c8521dc",
+          "binary": false
+        },
+        "sepolicy/service_contexts": {
+          "sha256": "cb37a8b6320d7f0a8b42445a974273fda48128d68e6bb34e62a8f69e975686fe",
+          "binary": false
+        },
+        "sepolicy/system_app.te": {
+          "sha256": "fe833627af36a3ee1027caf5ca94e824ff402a63c41eb03f0bb17a0448235234",
+          "binary": false
+        },
+        "sepolicy/system_server.te": {
+          "sha256": "905c8080d888934edb01bdd2d134b7924d12caf3ff8ae49bb79b03bb45c734a2",
+          "binary": false
+        },
+        "sepolicy/thermal-engine.te": {
+          "sha256": "0dd8e40a29b3abd49e8c8ad1f31065792f528de56b2c6ab62fe71c302333ad48",
+          "binary": false
+        },
+        "sepolicy/untrusted_app.te": {
+          "sha256": "1e6174d7563189ea360a97fe2d0bb84e6b66137cfad46b21afca97eab95cbdd0",
+          "binary": false
+        },
+        "sepolicy/vendor_init.te": {
+          "sha256": "eb00b48e38ef7a61918973387f6c70af68b5c044c5ce620d9a65fdb01b6297da",
+          "binary": false
+        },
+        "sepolicy/vndservice_contexts": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "binary": false
+        },
+        "sepolicy/vold.te": {
+          "sha256": "f2a1a63d1a4bae680fc74d1ca5663e981c229125a950d2c0907c98b086a3b59e",
+          "binary": false
+        },
+        "sepolicy/webview.te": {
+          "sha256": "2f6acf612c43b8c2268b813a551fca3f4e483e87a754f9a76768c64351509beb",
+          "binary": false
+        },
+        "sepolicy/zygote.te": {
+          "sha256": "0987684d90249565bf1da9ae701cbc87184205fea1cac05fb67741565bb27ad0",
+          "binary": false
+        }
+      }
+    },
+    {
+      "path": "vendor/motorola",
+      "repository": "lucasgsq/proprietary_vendor_motorola",
+      "commit": "096a5dc7c85b056940d92181ea49e2b942fdf020",
+      "previous_commit": "734060b984d66b6ad7ce72f3fe31b9e322fb216c",
+      "files": {
+        "quark/proprietary/lib/libAlAisLib.so": {
+          "sha256": "e7b9323a5bd4a85a2cb54db5313060d080498e5131da62d922407a0f6676e799",
+          "binary": true
+        },
+        "quark/proprietary/lib/libmmcamera_interface.so": {
+          "sha256": "2e8befeb02694477a582472d9844c252e2b428100f2500c504bc2ba24ef8e8be",
+          "binary": true
+        },
+        "quark/proprietary/vendor/bin/mm-qcamera-daemon": {
+          "sha256": "190361253f1bcc7e326804d49d5251782e0a3d2bcef00d7b46b520cbfb496a39",
+          "binary": true
+        },
+        "quark/proprietary/vendor/lib/libmmcamera_imglib.so": {
+          "sha256": "3d193ef5c1dd97641ed06426e888c7aee631296924a2b3b9e9db9f6352401d9a",
+          "binary": true
+        }
+      }
+    },
+    {
+      "path": "device/qcom/sepolicy-legacy",
+      "repository": "lucasgsq/android_device_qcom_sepolicy",
+      "commit": "b5e6c7331cea57c2a62d0800bb4ef74d05b74da4",
+      "previous_commit": "a3e5797421fa59c908a87b3b4bf307ab74f6ab38",
+      "files": {
+        "common/app.te": {
+          "sha256": "607cad21b13d2e121e5990438d567d13e2ed2d3d58abf5330fc3c8805e467f27",
+          "binary": false
+        },
+        "common/bluetooth.te": {
+          "sha256": "abcaabd5a879afbff6464a501819710d97f0871f079398e2d45cf688a0e85f4d",
+          "binary": false
+        },
+        "common/bootanim.te": {
+          "sha256": "eb533143f451f303c394caf56f852130a588e6055abb4a666f6d9b1aba005d8c",
+          "binary": false
+        },
+        "common/cameraserver.te": {
+          "sha256": "9ffdc6e7126b0a5d6478d6d8d9203a9f13eeefc48c42d2517943939885a75af6",
+          "binary": false
+        },
+        "common/domain.te": {
+          "sha256": "6d59afbe0f4ad9c8436abd8c4322a4e230bd9bd764bf94e930a39a72a8f168da",
+          "binary": false
+        },
+        "common/dpmd.te": {
+          "sha256": "5ed92441861c3a902ee68f079e4c01af64741b2fc6c0c2b62b67ba3baf9bf0a4",
+          "binary": false
+        },
+        "common/file.te": {
+          "sha256": "31a2a793c06d84a9d797913199f733254b3ddd77b478b8491aef3df4cf81fe03",
+          "binary": false
+        },
+        "common/file_contexts": {
+          "sha256": "29f4c328e5e9be8d5078bfde17c7fcd1f3f21774c5bfa412f0750c21b4a7e798",
+          "binary": false
+        },
+        "common/hal_bluetooth_qti.te": {
+          "sha256": "8da1db230bbd982d54306f8f529e012c5126bd4beb2d8536442476f453bae48a",
+          "binary": false
+        },
+        "common/hal_graphics_composer.te": {
+          "sha256": "b16cbf6808f2dd89f8e5d8ada44eed38d0807d448968b14ec36c8a692643597a",
+          "binary": false
+        },
+        "common/hal_iop_default.te": {
+          "sha256": "193a9c26a9a0d0f8ae17858b4a817d5da3dada17ab2c13a8f91d48cdcff30a06",
+          "binary": false
+        },
+        "common/hal_perf_default.te": {
+          "sha256": "802fbf8ca4655c04b43e71bfa373e49b6816254aa040347fe39f2ab69b0b52b8",
+          "binary": false
+        },
+        "common/init.te": {
+          "sha256": "5f61a61edbe6a5f6a8fba0129fd4c0ca86d53fda26dc3d30fed1eda2ac06e888",
+          "binary": false
+        },
+        "common/init_shell.te": {
+          "sha256": "a46a5df0ca215dd26a15b3e0a031043886ac574a62b1b34cf650d35fcef758cd",
+          "binary": false
+        },
+        "common/ipacm.te": {
+          "sha256": "793b04160501b36f15bd6b800a0e2a6cb833a9a5ba6f49a122fc56e8403adfda",
+          "binary": false
+        },
+        "common/location.te": {
+          "sha256": "ef7f028589e95a0d3417f52ba58beab55f2d7ce1d79fe710aa431719f7b1adba",
+          "binary": false
+        },
+        "common/mediacodec.te": {
+          "sha256": "247b74d6a3954bf46ddc4c20cc0c50f586ad31306a1348d43f3afafb279c931b",
+          "binary": false
+        },
+        "common/mmi.te": {
+          "sha256": "8e50d12aef2043a7993cee14f84e591f06c1482445ab3ff56e264f017eb9029f",
+          "binary": false
+        },
+        "common/mpdecision.te": {
+          "sha256": "08129b9aa6dd76801926628bd16cc8be657aa07700850a5e6f7c928655dcbb4e",
+          "binary": false
+        },
+        "common/msm_irqbalanced.te": {
+          "sha256": "ee55c19dae440209eb080b4a76d4f101794232c78396760cd7ab2bbb254f7b4a",
+          "binary": false
+        },
+        "common/netmgrd.te": {
+          "sha256": "eb6654c7f94a7b86e85c13c6335bae702001cf6c5492d9ce71619af8552f13c7",
+          "binary": false
+        },
+        "common/port-bridge.te": {
+          "sha256": "096a34bbe68b25fde2421fbe1c133d1a8852dbade9b29a18a73fbebad082ffaf",
+          "binary": false
+        },
+        "common/qcomsysd.te": {
+          "sha256": "9e0cca62666b2b36dcceae5d041caab6477a64f26e58b560c950a582190ba501",
+          "binary": false
+        },
+        "common/qlogd.te": {
+          "sha256": "d0473f1535a53308dbf9de51ec4c126cde4555e5ecff0dd67984bb6edaa430ae",
+          "binary": false
+        },
+        "common/qmuxd.te": {
+          "sha256": "e737785329a10d954ac636b466f3b98b3cd8d33de87fa4c170a8b06a8db1c1a9",
+          "binary": false
+        },
+        "common/quark_core_data.te": {
+          "sha256": "02fb7e34f7885924e3d0e9812d4994f4aad94125e018bd8aa32abea46ef123d0",
+          "binary": false
+        },
+        "common/quark_core_rfs.te": {
+          "sha256": "4a7da981dbfd309a8f16e5d50bbafbfcdbcf12d5ad99aa5a571da0e00b77e09a",
+          "binary": false
+        },
+        "common/quark_split_data.te": {
+          "sha256": "97211397eb118e35ae7d4f1a98ca65f81e5dfe871fdbb29f917393b86bc70431",
+          "binary": false
+        },
+        "common/recovery.te": {
+          "sha256": "772426bfd6d31ffc608f0616d9a653ac67283798902709ca8f3c6bd8d097787a",
+          "binary": false
+        },
+        "common/rfs_access.te": {
+          "sha256": "b26ad87dff946ff0c29bc2e9bf196bd84b095967dd156b6ae39ac28b89149695",
+          "binary": false
+        },
+        "common/sensors.te": {
+          "sha256": "a9379ee43c31d9e31660e461453e8d6973331e3bac070271f5a2b3313ec3114c",
+          "binary": false
+        },
+        "common/surfaceflinger.te": {
+          "sha256": "7b50e85f93abc33c38b264360b9ae6977983d5f86b1c0f3de9bbd3e4fd33b20c",
+          "binary": false
+        },
+        "common/system_server.te": {
+          "sha256": "77d35fd5cf094c02f79383d33c2b570607b66163220d8e2a8381a623ae48c570",
+          "binary": false
+        },
+        "common/thermal-engine.te": {
+          "sha256": "b69de9fb45b2e5dbdd090d1b56efa686f33fb4429b8c689d3c6ae254e1358ee2",
+          "binary": false
+        },
+        "common/usb_uicc_daemon.te": {
+          "sha256": "1435cf0542775ebc41f5b6fd5c5c45698644b14517860f80721c494329ee6da0",
+          "binary": false
+        },
+        "common/zygote.te": {
+          "sha256": "727d406d47e55053b5e3379a558a93db307c8a424a9cfbdb636472b05ddee5cc",
+          "binary": false
+        },
+        "legacy-common/bluetooth_loader.te": {
+          "sha256": "6cd42d868ba185830f454f588bb2c2965d72db3cf44fd6ca172fa86a5e179d7b",
+          "binary": false
+        },
+        "legacy-common/file_contexts": {
+          "sha256": "3b47b70dc042502e544a4b9c5b5210a467102a65b2e1b0f4e2bb39227f5f3cb5",
+          "binary": false
+        },
+        "legacy-common/fm_app.te": {
+          "sha256": "2659743df71083a125b8415ddaa8dd49b8f3b199dc676e935a71e53060d6ed4e",
+          "binary": false
+        },
+        "legacy-common/mm-qcamerad.te": {
+          "sha256": "cd5488aa56f6c8d82b825bb7849113d9388f10ad42ecb994754ab3dd6d57c8a1",
+          "binary": false
+        },
+        "private/app.te": {
+          "sha256": "c2e0899defd67ca28aefc26558d210d36aecca4b0121f4491efa095b287b9d87",
+          "binary": false
+        },
+        "private/bt_logger.te": {
+          "sha256": "af390ecbd8d046a07a4f523a10ece118f89ee456d4c971bd4b92f1f14f315633",
+          "binary": false
+        },
+        "private/dataservice_app.te": {
+          "sha256": "8bd6deb71bd445c8e884e6e1eb87641fe15cc15d410bb7b88793aad62d7757ef",
+          "binary": false
+        },
+        "private/dpmd.te": {
+          "sha256": "f03e10c0aa2112117288687fa818dcc5f34495967834a9501cdc8e5ce9d922bd",
+          "binary": false
+        },
+        "private/dun-server.te": {
+          "sha256": "aff7fe9f1417fe286a97b205a899987ff750321c4e4b02e2d8c0f18fccc455d8",
+          "binary": false
+        },
+        "private/qti-testscripts.te": {
+          "sha256": "d1cb4b6c2dbfdd96006174f3ce7908c756c4e0e4f7597196a04a1373be7af712",
+          "binary": false
+        },
+        "private/qvrd.te": {
+          "sha256": "a12425e9ec039b1c2e9ed155a698e2e98d8de61518b30ea4fd217c9552a979a3",
+          "binary": false
+        },
+        "private/seapp_contexts": {
+          "sha256": "d4ce7b33f5b25470372b030dbca823239443bfb6a87b54d0badf594d16a3f44f",
+          "binary": false
+        },
+        "private/seempd.te": {
+          "sha256": "ce3299f08a7bb7b6e6a9fe9c071a3ba9d4732da6ea19d3dd1961fa6691635339",
+          "binary": false
+        },
+        "private/smcinvoked.te": {
+          "sha256": "10e5751a5f58db26b8566683dbd1dbdc119b417fd9150618b93164829596c886",
+          "binary": false
+        },
+        "public/mmi_sys.te": {
+          "sha256": "aeb7cac5017baf307620312e35bcae2f2c7f5c36503616666c78e8654d4a58eb",
+          "binary": false
+        },
+        "public/wfdservice.te": {
+          "sha256": "e93a2ca588b5a6881165a934abc1565417cb23750b40a370e008d15c15fe53c3",
+          "binary": false
+        }
+      }
+    },
+    {
+      "path": "system/sepolicy",
+      "repository": "lucasgsq/android_system_sepolicy",
+      "commit": "0d741ce99ef864548f2444e7332d6fc4506ec0fb",
+      "previous_commit": "c590512ecdcf4980bc5ed1a5896be929c403b29c",
+      "files": {
+        "prebuilts/api/30.0/public/attributes": {
+          "sha256": "e6208ace04f90c204f6b9addbf3c0c5eb56846629f7010b000699f404a1d65b0",
+          "binary": false
+        },
+        "prebuilts/api/30.0/public/camera_service_server.te": {
+          "sha256": "1927200a7be4c6612c5d4311cd0d80691d903b3f452d09d7f964375e4aa02221",
+          "binary": false
+        },
+        "prebuilts/api/30.0/public/cameraserver.te": {
+          "sha256": "3e51e144c2a6d210afc2d22b61405927e3542079d1928e5b8f30d3a33f0f7df0",
+          "binary": false
+        },
+        "prebuilts/api/30.0/public/hal_camera.te": {
+          "sha256": "716ceeba31b49b5c9bf798335843f6c05ad021d4417c48a1df1c703cd85d3eb7",
+          "binary": false
+        },
+        "public/attributes": {
+          "sha256": "e6208ace04f90c204f6b9addbf3c0c5eb56846629f7010b000699f404a1d65b0",
+          "binary": false
+        },
+        "public/camera_service_server.te": {
+          "sha256": "1927200a7be4c6612c5d4311cd0d80691d903b3f452d09d7f964375e4aa02221",
+          "binary": false
+        },
+        "public/cameraserver.te": {
+          "sha256": "3e51e144c2a6d210afc2d22b61405927e3542079d1928e5b8f30d3a33f0f7df0",
+          "binary": false
+        },
+        "public/hal_camera.te": {
+          "sha256": "716ceeba31b49b5c9bf798335843f6c05ad021d4417c48a1df1c703cd85d3eb7",
+          "binary": false
+        }
+      }
+    },
+    {
+      "path": "device/lineage/sepolicy",
+      "repository": "lucasgsq/android_device_lineage_sepolicy",
+      "commit": "9661c7e2a5ea364e827a60fc8cd6d450b22c3426",
+      "previous_commit": "02f04d2b0a57f1c7435dc9f2ce8fac2640b38782",
+      "files": {
+        "legacy-common/public/legacy-camera-hal1/mediaserver.te": {
+          "sha256": "050eebe2744c53849e6bccb42b824fff7e79b0530638c020806c272221e214a5",
+          "binary": false
+        }
+      }
+    }
+  ]
+}
