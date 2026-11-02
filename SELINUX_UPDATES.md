@@ -32,3 +32,7 @@ Negativas DAC do thermal-engine e leituras de camera_prop ainda exigem investiga
 Os commits anteriores e novos, com hashes dos arquivos publicados, estao em selinux-sync-plan.json. Use reversoes coordenadas dos repositorios e do manifesto; reverter apenas um componente pode quebrar os tipos, contextos ou a camera. Nenhum historico foi reescrito.
 
 QUARK_OUT_DIR permite escolher outra pasta explicitamente. O script ignora um OUT_DIR herdado de outra arvore para evitar misturar saidas Android 11 e Android 12.
+
+## Consolidacao dos nomes de branch
+
+Atualize este manifesto antes de repo sync: media e display agora usam `A12+`, preservando os mesmos commits. Os branches antigos foram removidos dos repositorios proprios de build. A11+KSU e o padrao dos repositorios; A12+ permanece experimental.
