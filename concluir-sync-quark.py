@@ -11,6 +11,7 @@ import subprocess
 
 
 POLICIES = ['device/lineage/sepolicy', 'device/qcom/sepolicy-legacy', 'system/sepolicy']
+METADATA_PROJECTS = POLICIES + ['hardware/qcom-caf/apq8084/media', 'hardware/qcom-caf/apq8084/display']
 PROJECTS = ['hardware/qcom-caf/apq8084/media', 'hardware/qcom-caf/apq8084/display',
             'device/motorola/quark', 'kernel/motorola/apq8084', 'vendor/motorola',
             'device/qcom/sepolicy-legacy', 'system/sepolicy', 'device/lineage/sepolicy']
@@ -92,8 +93,8 @@ def run_logged(root, command, logfile):
 def metadata_project(output):
     if '--force-sync' not in output or not any(x in output for x in ['hooks is different', 'not enabled', 'different object', 'overwrite a local work tree']):
         return None
-    for path in POLICIES:
-        if 'repo sync --force-sync '+path in output or '/projects/'+path+'.git' in output:
+    for path in METADATA_PROJECTS:
+        if re.search(r'repo sync --force-sync\s+'+re.escape(path)+r'''(?=[\s`'"]|$)''', output) or re.search('/projects/'+re.escape(path)+r'''\.git(?=[\s`'"]|$)''', output):
             return path
     return None
 
@@ -109,10 +110,10 @@ def main():
     plan = json.loads((manifests/'selinux-sync-plan.json').read_text())
     if plan['branch'] != args.branch or not (root/'build/envsetup.sh').is_file():
         raise SystemExit('Arvore/branch nao corresponde ao plano selecionado.')
-    for path in POLICIES:
+    for path in METADATA_PROJECTS:
         require_clean(root/path)
     print('Arvore: '+str(root))
-    print('Somente os tres repositorios de politica poderao receber --force-sync.')
+    print('Somente politicas, media e display poderao receber --force-sync, apos backup.')
     print('Historicos, refs, stashes e arquivos particulares serao preservados antes do sync.')
     if not args.apply:
         print('Conferencia concluida. Acrescente --apply para fazer backup e sincronizar.')
@@ -124,7 +125,7 @@ def main():
     backup.mkdir(parents=True, mode=0o700)
     os.chmod(str(backup), 0o700)
     records = []
-    for path in POLICIES:
+    for path in METADATA_PROJECTS:
         records.append(backup_policy(root/path, backup/path))
         print('Bundle verificado: '+path, flush=True)
     status = {'root': str(root), 'backups': records, 'forced_projects': [], 'completed': False}
@@ -133,7 +134,7 @@ def main():
     save()
     print('Backup privado: '+str(backup), flush=True)
     normal = ['repo', 'sync', '-j1', '--fail-fast', *PROJECTS]
-    for attempt in range(4):
+    for attempt in range(len(METADATA_PROJECTS)+1):
         code, output = run_logged(root, normal, backup/('sync-'+str(attempt)+'.log'))
         if code == 0:
             for item in plan['repositories']:
