@@ -11,15 +11,19 @@ Inclui device tree, politica Qualcomm legada, politica de plataforma, perfil Lin
 Nao execute repo sync diretamente sobre os patches locais sem preserva-los. A ferramenta abaixo verifica hashes e guarda somente os arquivos publicados, com backup em ~/quark-sync-backups e stash por repositorio. Editos diferentes dos publicados provocam recusa antes de qualquer alteracao. lineage_quark.mk com a configuracao particular de assinatura fica fora da lista, assim como as chaves privadas. Outros arquivos particulares nao sao guardados nem descartados.
 
 ```bash
+(
+set -e
 cd ~/android/lineage19
-git -C .repo/local_manifests pull --ff-only origin A12+
-python3 .repo/local_manifests/prepare-sync.py
-python3 .repo/local_manifests/prepare-sync.py --apply
-repo sync -j4 device/motorola/quark vendor/motorola device/qcom/sepolicy-legacy system/sepolicy device/lineage/sepolicy
+curl -fL "https://raw.githubusercontent.com/lucasgsq/local_manifests/A12+/instalar-manifesto-quark.py" -o /tmp/instalar-manifesto-quark.py
+python3 /tmp/instalar-manifesto-quark.py --branch "A12+" --apply
+repo sync -j1 --fail-fast hardware/qcom-caf/apq8084/media hardware/qcom-caf/apq8084/display device/motorola/quark kernel/motorola/apq8084 vendor/motorola device/qcom/sepolicy-legacy system/sepolicy device/lineage/sepolicy
 bash .repo/local_manifests/build-quark.sh
+)
 ```
 
-A linha pull pressupoe que o repositorio do manifesto ja esteja no branch A12+. Para uma arvore nova, selecione esse branch antes do sync, sem executar o preparador de stashes. Nao reaplique os stashes apos o sync: as mesmas alteracoes estao nos commits. Os backups e os identificadores de stash permanecem disponiveis para recuperacao; nao sao apagados automaticamente. Se a ferramenta recusar uma divergencia, revise-a antes de prosseguir. Nao use reset --hard, clean ou sync com descarte forcado.
+Nao e necessario que local_manifests ja seja Git. O instalador preserva a pasta anterior integralmente em .repo/local_manifests-before-DATA, fora da pasta ativa. XMLs particulares sao mantidos e excluidos de commits acidentais; as entradas dos projetos gerenciados sao substituidas pelo manifesto atual para evitar duplicatas. O clone novo permite git pull nas proximas atualizacoes.
+
+Nao reaplique os stashes apos o sync: as mesmas alteracoes estao nos commits. Backups e stashes permanecem disponiveis; se alguma conferencia falhar, pare e revise a mensagem antes de sincronizar. Nao use reset --hard, clean ou descarte forcado.
 
 O build usa OUT_DIR absoluto para evitar gerar os headers dentro do kernel. Padrao: out-a12-policy, variante userdebug. JOBS=4 pode reduzir paralelismo. BUILD_VARIANT pode selecionar user/userdebug/eng, respeitando a politica de bring-up descrita acima. Registra quark-build-sources.json e o log de compilacao. Nao usa SELINUX_IGNORE_NEVERALLOWS, nao instala ou faz flash. A pasta de saida pode ser reutilizada sem limpeza; algumas regras podem ser regeneradas pelos novos caminhos/revisoes.
 
