@@ -1,0 +1,10 @@
+{
+  "python38_syntax": true,
+  "only_policy_metadata_errors_authorize_force_sync": true,
+  "network_errors_do_not_authorize_force_sync": true,
+  "bundles_verified_and_include_stashes": true,
+  "untracked_files_backed_up_and_preserved": true,
+  "dirty_policy_tree_refused_before_sync": true,
+  "no_force_checkout_used": true,
+  "actual_user_repo_sync_not_executed_here": true
+}
