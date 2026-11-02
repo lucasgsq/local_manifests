@@ -142,7 +142,8 @@ def main():
     print('XMLs particulares preservados: '+str(len(preserved)))
     print('Conferindo os patches locais antes de repo sync...', flush=True)
     subprocess.run(['python3', str(installed/'prepare-sync.py'), '--root', str(root), '--apply'], check=True)
-    print('\nPreparacao concluida. Agora execute repo sync. Nao reaplique os stashes guardados.')
+    print('\nPreparacao concluida. Nao reaplique os stashes guardados.')
+    print('Para concluir o sync: python3 .repo/local_manifests/concluir-sync-quark.py --branch '+args.branch+' --apply')
     print('Nenhuma fonte foi descartada; nenhuma limpeza ou sincronizacao forcada foi executada.')
 
 

@@ -16,7 +16,7 @@ set -e
 cd ~/android/lineage19
 curl -fL "https://raw.githubusercontent.com/lucasgsq/local_manifests/A12+/instalar-manifesto-quark.py" -o /tmp/instalar-manifesto-quark.py
 python3 /tmp/instalar-manifesto-quark.py --branch "A12+" --apply
-repo sync -j1 --fail-fast hardware/qcom-caf/apq8084/media hardware/qcom-caf/apq8084/display device/motorola/quark kernel/motorola/apq8084 vendor/motorola device/qcom/sepolicy-legacy system/sepolicy device/lineage/sepolicy
+python3 .repo/local_manifests/concluir-sync-quark.py --branch "A12+" --apply
 bash .repo/local_manifests/build-quark.sh
 )
 ```
@@ -40,3 +40,9 @@ QUARK_OUT_DIR permite escolher outra pasta explicitamente. O script ignora um OU
 ## Consolidacao dos nomes de branch
 
 Atualize este manifesto antes de repo sync: media e display agora usam `A12+`, preservando os mesmos commits. Os branches antigos foram removidos dos repositorios proprios de build. A11+KSU e o padrao dos repositorios; A12+ permanece experimental.
+
+## Troca de metadados dos forks de politica
+
+O preparador guarda os patches locais. O novo concluir-sync-quark.py preserva tambem os historicos e stashes dos tres projetos de politica em bundles verificados, com copias de configuracao Git e arquivos nao rastreados em ~/quark-sync-backups/metadata-DATA. Recusa alteracoes rastreadas ainda pendentes. Primeiro tenta repo sync normal; somente se o repo identificar incompatibilidade dos metadados ao trocar para os forks, executa --force-sync no projeto de politica indicado. Nunca usa --force-checkout e nao forca device, vendor ou kernel. Outros erros interrompem a operacao.
+
+Se o instalador e o prepare-sync.py ja terminaram, nao os execute novamente apenas por esse erro. Atualize este repositorio Git com pull --ff-only e execute concluir-sync-quark.py --branch "A12+" --apply. Nao reaplique os stashes: as mesmas alteracoes estao publicadas. A migracao nao instala imagens no aparelho.
