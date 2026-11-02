@@ -41,8 +41,8 @@ QUARK_OUT_DIR permite escolher outra pasta explicitamente. O script ignora um OU
 
 Atualize este manifesto antes de repo sync: media e display agora usam `A12+`, preservando os mesmos commits. Os branches antigos foram removidos dos repositorios proprios de build. A11+KSU e o padrao dos repositorios; A12+ permanece experimental.
 
-## Troca de metadados dos forks de politica
+## Troca de metadados dos forks
 
-O preparador guarda os patches locais. O novo concluir-sync-quark.py preserva tambem os historicos e stashes dos tres projetos de politica em bundles verificados, com copias de configuracao Git e arquivos nao rastreados em ~/quark-sync-backups/metadata-DATA. Recusa alteracoes rastreadas ainda pendentes. Primeiro tenta repo sync normal; somente se o repo identificar incompatibilidade dos metadados ao trocar para os forks, executa --force-sync no projeto de politica indicado. Nunca usa --force-checkout e nao forca device, vendor ou kernel. Outros erros interrompem a operacao.
+O concluir-sync-quark.py preserva os historicos e stashes dos tres projetos de politica e de media/display em bundles verificados. Tambem salva configuracoes Git e arquivos nao rastreados em ~/quark-sync-backups/metadata-DATA. Nao apaga backups anteriores. Recusa alteracoes rastreadas pendentes. Primeiro tenta sync normal; apenas diante do erro especifico de metadados pode usar --force-sync no projeto indicado, dentro dessa lista de cinco. Nao usa --force-checkout nem forca device, vendor ou kernel. Outros erros interrompem a operacao.
 
-Se o instalador e o prepare-sync.py ja terminaram, nao os execute novamente apenas por esse erro. Atualize este repositorio Git com pull --ff-only e execute concluir-sync-quark.py --branch "A12+" --apply. Nao reaplique os stashes: as mesmas alteracoes estao publicadas. A migracao nao instala imagens no aparelho.
+Se instalador e prepare-sync.py ja terminaram, nao os refaca por causa desse erro. Atualize este repositorio com pull --ff-only e rode concluir-sync-quark.py --branch "A12+" --apply. Projetos ja migrados apenas serao verificados/sincronizados normalmente. Nao reaplique os stashes: as alteracoes estao publicadas. Nenhuma imagem e instalada no aparelho.
