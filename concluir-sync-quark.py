@@ -11,10 +11,11 @@ import subprocess
 
 
 POLICIES = ['device/lineage/sepolicy', 'device/qcom/sepolicy-legacy', 'system/sepolicy']
-METADATA_PROJECTS = POLICIES + ['hardware/qcom-caf/apq8084/media', 'hardware/qcom-caf/apq8084/display']
+METADATA_PROJECTS = POLICIES + ['hardware/qcom-caf/apq8084/media', 'hardware/qcom-caf/apq8084/display', 'packages/apps/Settings']
 PROJECTS = ['hardware/qcom-caf/apq8084/media', 'hardware/qcom-caf/apq8084/display',
             'device/motorola/quark', 'kernel/motorola/apq8084', 'vendor/motorola',
-            'device/qcom/sepolicy-legacy', 'system/sepolicy', 'device/lineage/sepolicy']
+            'device/qcom/sepolicy-legacy', 'system/sepolicy', 'device/lineage/sepolicy',
+            'packages/apps/Settings']
 
 
 def git(repo, *args):
@@ -113,7 +114,7 @@ def main():
     for path in METADATA_PROJECTS:
         require_clean(root/path)
     print('Arvore: '+str(root))
-    print('Somente politicas, media e display poderao receber --force-sync, apos backup.')
+    print('Somente politicas, media, display e Settings poderao receber --force-sync, apos backup.')
     print('Historicos, refs, stashes e arquivos particulares serao preservados antes do sync.')
     if not args.apply:
         print('Conferencia concluida. Acrescente --apply para fazer backup e sincronizar.')
