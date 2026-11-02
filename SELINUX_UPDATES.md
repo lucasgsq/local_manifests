@@ -25,7 +25,7 @@ Nao e necessario que local_manifests ja seja Git. O instalador preserva a pasta 
 
 Nao reaplique os stashes apos o sync: as mesmas alteracoes estao nos commits. Backups e stashes permanecem disponiveis; se alguma conferencia falhar, pare e revise a mensagem antes de sincronizar. Nao use reset --hard, clean ou descarte forcado.
 
-O build usa OUT_DIR absoluto para evitar gerar os headers dentro do kernel. Padrao: out-a12-policy, variante userdebug. JOBS=4 pode reduzir paralelismo. BUILD_VARIANT pode selecionar user/userdebug/eng, respeitando a politica de bring-up descrita acima. Registra quark-build-sources.json e o log de compilacao. Nao usa SELINUX_IGNORE_NEVERALLOWS, nao instala ou faz flash. A pasta de saida pode ser reutilizada sem limpeza; algumas regras podem ser regeneradas pelos novos caminhos/revisoes.
+O build usa OUT_DIR absoluto para evitar gerar os headers dentro do kernel. A pasta padrao acompanha a variante: user -> out-user; userdebug -> out-userdebug; eng -> out-eng. JOBS=4 pode reduzir paralelismo. BUILD_VARIANT pode selecionar user/userdebug/eng, respeitando a politica de bring-up descrita acima. Registra quark-build-sources.json e o log de compilacao. Nao usa SELINUX_IGNORE_NEVERALLOWS, nao instala ou faz flash. A pasta de saida pode ser reutilizada sem limpeza; algumas regras podem ser regeneradas pelos novos caminhos/revisoes.
 
 ## Pendencias que esta consolidacao nao declara resolvidas
 
@@ -46,3 +46,13 @@ Atualize este manifesto antes de repo sync: media e display agora usam `A12+`, p
 O concluir-sync-quark.py preserva os historicos e stashes dos tres projetos de politica e de media/display em bundles verificados. Tambem salva configuracoes Git e arquivos nao rastreados em ~/quark-sync-backups/metadata-DATA. Nao apaga backups anteriores. Recusa alteracoes rastreadas pendentes. Primeiro tenta sync normal; apenas diante do erro especifico de metadados pode usar --force-sync no projeto indicado, dentro dessa lista de cinco. Nao usa --force-checkout nem forca device, vendor ou kernel. Outros erros interrompem a operacao.
 
 Se instalador e prepare-sync.py ja terminaram, nao os refaca por causa desse erro. Atualize este repositorio com pull --ff-only e rode concluir-sync-quark.py --branch "A12+" --apply. Projetos ja migrados apenas serao verificados/sincronizados normalmente. Nao reaplique os stashes: as alteracoes estao publicadas. Nenhuma imagem e instalada no aparelho.
+
+## Pasta de saida por variante
+
+| BUILD_VARIANT | Pasta padrao |
+| --- | --- |
+| user | out-user |
+| userdebug | out-userdebug |
+| eng | out-eng |
+
+O script transforma a pasta em caminho absoluto dentro da arvore Android atual. QUARK_OUT_DIR continua permitindo escolher outra saida explicitamente. Pastas existentes, incluindo out e out-user-policy, nao sao movidas nem removidas. Para a primeira build na nova pasta, o compilador precisara gerar seus intermediarios.

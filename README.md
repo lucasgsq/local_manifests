@@ -45,3 +45,13 @@ Negativas de camera_prop, DAC termico e restricoes do AIDA64 continuam em invest
 O concluir-sync-quark.py preserva os historicos e stashes dos tres projetos de politica e de media/display em bundles verificados. Tambem salva configuracoes Git e arquivos nao rastreados em ~/quark-sync-backups/metadata-DATA. Nao apaga backups anteriores. Recusa alteracoes rastreadas pendentes. Primeiro tenta sync normal; apenas diante do erro especifico de metadados pode usar --force-sync no projeto indicado, dentro dessa lista de cinco. Nao usa --force-checkout nem forca device, vendor ou kernel. Outros erros interrompem a operacao.
 
 Se instalador e prepare-sync.py ja terminaram, nao os refaca por causa desse erro. Atualize este repositorio com pull --ff-only e rode concluir-sync-quark.py --branch "A12+" --apply. Projetos ja migrados apenas serao verificados/sincronizados normalmente. Nao reaplique os stashes: as alteracoes estao publicadas. Nenhuma imagem e instalada no aparelho.
+
+## Pasta de saida por variante
+
+| BUILD_VARIANT | Pasta padrao |
+| --- | --- |
+| user | out-user |
+| userdebug | out-userdebug |
+| eng | out-eng |
+
+O script transforma a pasta em caminho absoluto dentro da arvore Android atual. QUARK_OUT_DIR continua permitindo escolher outra saida explicitamente. Pastas existentes, incluindo out e out-user-policy, nao sao movidas nem removidas. Para a primeira build na nova pasta, o compilador precisara gerar seus intermediarios.
