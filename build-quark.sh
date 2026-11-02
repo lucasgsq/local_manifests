@@ -7,8 +7,9 @@ variant="${BUILD_VARIANT:-$QUARK_DEFAULT_VARIANT}"
 jobs="${JOBS:-8}"
 case "$variant" in user|userdebug|eng) ;; *) echo 'BUILD_VARIANT invalido.' >&2; exit 2;; esac
 [[ "$jobs" =~ ^[1-9][0-9]*$ ]] || exit 2
-out="${QUARK_OUT_DIR:-$QUARK_DEFAULT_OUT}"
+out="${QUARK_OUT_DIR:-out-$variant}"
 case "$out" in /*) export OUT_DIR="$out";; *) export OUT_DIR="$(pwd -P)/$out";; esac
+printf 'Variante: %s | OUT_DIR: %s\n' "$variant" "$OUT_DIR"
 source build/envsetup.sh
 lunch "lineage_quark-$variant"
 sdk="$(get_build_var PLATFORM_SDK_VERSION)"
