@@ -19,7 +19,6 @@
     <!-- Legacy source baselines: availability verified, Android 12 build/API
          compatibility remains to be validated. -->
     <project path="hardware/qcom-caf/apq8084/audio" name="LineageOS/android_hardware_qcom_audio" remote="github" revision="lineage-18.1-caf-apq8084" />
-    <project path="device/qcom/sepolicy-legacy" name="LineageOS/android_device_qcom_sepolicy" remote="github" revision="lineage-18.1-legacy" />
 
     <!-- Qualcomm SoftAP SDK required by libqsapshim -->
     <project name="LineageOS/android_system_qcom" path="system/qcom" remote="github" revision="lineage-19.1" />
@@ -30,4 +29,13 @@
     <!-- timekeep service-->
 	<project name="LineageOS/android_hardware_sony_timekeep" path="hardware/sony/timekeep" remote="github" revision="lineage-19.1" />
     
+
+    <!-- Matching SELinux forks: source corrections through validated stage 35. -->
+    <remove-project name="LineageOS/android_device_qcom_sepolicy" path="device/qcom/sepolicy-legacy" optional="true" />
+    <project name="lucasgsq/android_device_qcom_sepolicy" path="device/qcom/sepolicy-legacy" remote="github" revision="A12+" groups="qcom,pdk-qcom" />
+    <remove-project name="LineageOS/android_system_sepolicy" path="system/sepolicy" optional="true" />
+    <project name="lucasgsq/android_system_sepolicy" path="system/sepolicy" remote="github" revision="A12+" groups="pdk" />
+    <remove-project name="LineageOS/android_device_lineage_sepolicy" path="device/lineage/sepolicy" optional="true" />
+    <project name="lucasgsq/android_device_lineage_sepolicy" path="device/lineage/sepolicy" remote="github" revision="A12+" />
+
 </manifest>

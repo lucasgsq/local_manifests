@@ -1,4 +1,4 @@
-# Quark A12+ — experimental LineageOS 19.1 manifest
+# Quark A12+ â€” experimental LineageOS 19.1 manifest
 
 This branch targets Android 12.1 / LineageOS 19.1. It is a source-selection
 starting point, not a successfully built or boot-tested ROM. Keep the existing
@@ -79,3 +79,8 @@ build to record exact revisions; branch references intentionally advance.
 7. Validate build, recovery/update behavior, enforcing boot and hardware.
 
 See device/motorola/quark/docs/A12-bringup.md for the device-side checkpoint.
+
+
+## SELinux consolidation through stage 35
+
+See [SELINUX_UPDATES.md](SELINUX_UPDATES.md) for matching forks, safe migration of local patches, absolute OUT_DIR builds and validation limits.
