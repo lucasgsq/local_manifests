@@ -6,8 +6,8 @@
     <remove-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/apq8084/display" />
 
     <!-- Owned copies include the pinned Quark media/display backports. -->
-    <project path="hardware/qcom-caf/apq8084/media" name="lucasgsq/android_hardware_qcom_media" remote="github" revision="A11+" groups="qcom,pdk-qcom" />
-    <project path="hardware/qcom-caf/apq8084/display" name="lucasgsq/android_hardware_qcom_display" remote="github" revision="A11+" groups="pdk-qcom,qcom,qcom_display" />
+    <project path="hardware/qcom-caf/apq8084/media" name="lucasgsq/android_hardware_qcom_media" remote="github" revision="A11+KSU" groups="qcom,pdk-qcom" />
+    <project path="hardware/qcom-caf/apq8084/display" name="lucasgsq/android_hardware_qcom_display" remote="github" revision="A11+KSU" groups="pdk-qcom,qcom,qcom_display" />
 
     <!--Device Trees-->
     <project path="device/motorola/quark" name="lucasgsq/device_motorola_quark" remote="github" revision="A11+KSU"/>

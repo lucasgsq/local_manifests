@@ -1,7 +1,7 @@
 # Optional Quark applications
 
 TurboToast (com.bhb27.turbotoast) and Kernel Adiutor
-(com.bhb27.kerneladiutor) are not selected for the A11+/A12+ ROM builds.
+(com.bhb27.kerneladiutor) are not selected for the A11+KSU/A12+ ROM builds.
 Their original APKs remain archived in the vendor repository. No kernel
 changes or automatic first-boot installer are required.
 
