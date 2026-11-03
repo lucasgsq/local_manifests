@@ -10,6 +10,11 @@ case "$variant" in user|userdebug|eng) ;; *) echo 'BUILD_VARIANT invalido.' >&2;
 out="${QUARK_OUT_DIR:-out-$variant}"
 case "$out" in /*) export OUT_DIR="$out";; *) export OUT_DIR="$(pwd -P)/$out";; esac
 printf 'Variante: %s | OUT_DIR: %s\n' "$variant" "$OUT_DIR"
+# Generate the reference before lunch/Soong reads device overlays.
+export QUARK_SECURITY_BACKPORT_OVERLAY="device/motorola/quark/overlay-security-generated/$variant"
+python3 "$script_dir/check-security-backports.py" \
+    --root "$(pwd -P)" --config "$script_dir/security-backport-check.json" \
+    --variant "$variant" --out "$OUT_DIR"
 source build/envsetup.sh
 lunch "lineage_quark-$variant"
 sdk="$(get_build_var PLATFORM_SDK_VERSION)"
