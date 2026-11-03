@@ -76,6 +76,56 @@ def backup_policy(repo, output):
     return record
 
 
+def backup_project(root, relative, output):
+    """Preserve an existing checkout, or its Repo metadata if checkout is absent."""
+    repo = root/relative
+    if repo.is_dir():
+        return backup_policy(repo, output)
+    if repo.exists() or repo.is_symlink():
+        raise RuntimeError('Caminho de projeto invalido: '+str(repo))
+    gitdir = root/'.repo/projects'/(relative+'.git')
+    if not gitdir.exists():
+        if gitdir.is_symlink():
+            raise RuntimeError('Metadados com link quebrado: '+str(gitdir))
+        return {'path': str(repo), 'working_tree_missing': True,
+                'git_metadata_missing': True}
+    if not gitdir.is_dir():
+        raise RuntimeError('Metadados invalidos: '+str(gitdir))
+    output.mkdir(parents=True, mode=0o700)
+    os.chmod(str(output), 0o700)
+
+    def metadata(*args, required=True):
+        result = subprocess.run(['git', '--git-dir='+str(gitdir),
+                                 '--work-tree='+str(root), *args],
+                                cwd=str(root), stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        if required and result.returncode:
+            raise RuntimeError('Falha ao preservar metadados de '+relative+': '+
+                               result.stderr.decode(errors='replace'))
+        return result
+
+    refs = metadata('for-each-ref', '--format=%(refname) %(objectname)').stdout
+    head_result = metadata('rev-parse', '--verify', 'HEAD^{commit}', required=False)
+    head = head_result.stdout.decode().strip() if head_result.returncode == 0 else None
+    bundle = None
+    if refs.strip() or head:
+        bundle = output/'history.bundle'
+        metadata('bundle', 'create', str(bundle), '--all', *(['HEAD'] if head else []))
+        metadata('bundle', 'verify', str(bundle))
+        os.chmod(str(bundle), 0o600)
+    (output/'refs.txt').write_bytes(refs)
+    for name in ['config', 'HEAD', 'index']:
+        source = gitdir/name
+        if source.is_file():
+            shutil.copyfile(source, output/('git-'+name))
+            os.chmod(str(output/('git-'+name)), 0o600)
+    record = {'path': str(repo), 'working_tree_missing': True,
+              'git_metadata_missing': False, 'head': head,
+              'bundle': str(bundle) if bundle else None}
+    (output/'backup.json').write_bytes((json.dumps(record, indent=2)+'\n').encode())
+    return record
+
+
 def run_logged(root, command, logfile):
     print('\nExecutando: '+' '.join(command), flush=True)
     lines = []
@@ -112,7 +162,13 @@ def main():
     if plan['branch'] != args.branch or not (root/'build/envsetup.sh').is_file():
         raise SystemExit('Arvore/branch nao corresponde ao plano selecionado.')
     for path in METADATA_PROJECTS:
-        require_clean(root/path)
+        repo = root/path
+        if repo.is_dir():
+            require_clean(repo)
+        elif repo.exists() or repo.is_symlink():
+            raise SystemExit('Caminho de projeto invalido: '+str(repo))
+        else:
+            print('Projeto ainda sem checkout; sera sincronizado: '+path)
     print('Arvore: '+str(root))
     print('Somente politicas, media, display e Settings poderao receber --force-sync, apos backup.')
     print('Historicos, refs, stashes e arquivos particulares serao preservados antes do sync.')
@@ -127,8 +183,10 @@ def main():
     os.chmod(str(backup), 0o700)
     records = []
     for path in METADATA_PROJECTS:
-        records.append(backup_policy(root/path, backup/path))
-        print('Bundle verificado: '+path, flush=True)
+        record = backup_project(root, path, backup/path)
+        records.append(record)
+        print(('Checkout ausente; estado inicial registrado: ' if record.get('working_tree_missing')
+               else 'Bundle verificado: ')+path, flush=True)
     status = {'root': str(root), 'backups': records, 'forced_projects': [], 'completed': False}
     def save():
         (backup/'sync-result.json').write_bytes((json.dumps(status, indent=2)+'\n').encode())
@@ -152,7 +210,11 @@ def main():
         path = metadata_project(output)
         if path is None or path in status['forced_projects']:
             raise SystemExit('Sync interrompido por erro que exige revisao. Logs e backups: '+str(backup))
-        require_clean(root/path)
+        # A failed normal sync can leave metadata even when no checkout existed.
+        # Preserve that state before the narrowly scoped metadata repair too.
+        record = backup_project(root, path, backup/'before-force'/path)
+        status['backups'].append(record)
+        save()
         command = ['repo', 'sync', '--force-sync', '-j1', '--fail-fast', path]
         code, unused = run_logged(root, command, backup/('metadata-'+path.replace('/', '-')+'.log'))
         status['forced_projects'].append(path)
